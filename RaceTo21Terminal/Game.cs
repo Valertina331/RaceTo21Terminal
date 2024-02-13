@@ -10,7 +10,7 @@ namespace RaceTo21
         CardTable cardTable; // object in charge of displaying game information
         Deck deck = new Deck(); // deck of cards
         int currentPlayer = 0; // current player on list
-        public string nextTask; // keeps track of game state
+        public Task nextTask; // keeps track of game state
         private bool cheating = false; // lets you cheat for testing purposes if true
 
         public Game(CardTable c)
@@ -18,7 +18,7 @@ namespace RaceTo21
             cardTable = c;
             deck.Shuffle();
             deck.ShowAllCards();
-            nextTask = "GetNumberOfPlayers";
+            nextTask = Task.GetNumberOfPlayers;
         }
 
         /* Adds a player to the current game
