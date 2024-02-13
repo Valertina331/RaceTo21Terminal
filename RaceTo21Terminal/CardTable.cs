@@ -122,8 +122,32 @@ namespace RaceTo21
             {
                 Console.WriteLine("Everyone busted!");
             }
-            Console.Write("Press <Enter> to exit... ");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
+
+        public void AskPlayersIfContinue(List<Player> players)
+        {
+             List<Player> playersToRemove = new List<Player>();
+
+             for (int i = 0; i < players.Count; i++)
+             {
+                 Console.WriteLine(players[i].name + ", do you want to play another round? (Y/N)");
+                 string input = Console.ReadLine().ToUpper();
+                 if (input != "Y")
+                 {
+                     playersToRemove.Add(players[i]);
+                 }
+             }
+
+             foreach (Player playerToRemove in playersToRemove)
+             {
+                 players.Remove(playerToRemove);
+             }
+
+             if (players.Count == 0)
+             {
+                 Console.Write("Press <Enter> to exit... ");
+                 while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+             }
+         }
     }
 }
