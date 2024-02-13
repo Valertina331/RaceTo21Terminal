@@ -226,9 +226,19 @@ namespace RaceTo21
             }
             if (winner.status == PlayerStatus.win && winner != null)
             {
+                UpdateWinnerTotalScore(winner);
                 return winner;
             }
             return (highScore > 0) ? winner : null;
+        }
+
+        public void UpdateWinnerTotalScore(Player winner)
+        {
+            if (winner != null)
+            {
+                winner.TotalScore += winner.score;
+                Console.WriteLine(winner.name + " wins this round with {winner.Score} points! Total score: {winner.TotalScore}");
+            }
         }
     }
 }
