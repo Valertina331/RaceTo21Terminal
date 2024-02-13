@@ -74,7 +74,6 @@ namespace RaceTo21
                         else if (player.score == 21)
                         {
                             player.status = PlayerStatus.win;
-                            nextTask = Task.GameOver;
                         }
                     }
                     else
@@ -83,7 +82,16 @@ namespace RaceTo21
                     }
                 }
                 cardTable.ShowHand(player);
-                nextTask = Task.CheckForEnd;
+                if (CheckBustNum() || player.score == 21)
+                {
+                    Player winner = DoFinalScoring();
+                    cardTable.AnnounceWinner(winner);
+                    nextTask = Task.GameOver;
+                }
+                else
+                {
+                    nextTask = Task.CheckForEnd;
+                }            
             }
             else if (nextTask == Task.CheckForEnd)
             {
@@ -110,6 +118,26 @@ namespace RaceTo21
             }
         }
 
+        public bool CheckBustNum()
+        {
+            List<Player> bustPlayers = new List<Player>();
+            foreach (Player p in players)
+            {
+                if (p.status == PlayerStatus.bust)
+                {
+                    bustPlayers.Add(p);
+                }
+            }
+            if (bustPlayers.Count == numberOfPlayers - 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         public int ScoreHand(Player player)
         {
             int score = 0;
@@ -162,28 +190,42 @@ namespace RaceTo21
         public Player DoFinalScoring()
         {
             int highScore = 0;
+            int activePlayersNum = 0;
+            Player winner = null;
+            Player lastActivePlayer = null;
+            
             foreach (var player in players)
             {
                 cardTable.ShowHand(player);
                 if (player.status == PlayerStatus.win) // someone hit 21
                 {
-                    return player;
+                    winner = player;
+                    break;
+                }
+                if (player.status != PlayerStatus.bust) // check bust
+                {
+                    activePlayersNum++;
+                    lastActivePlayer = player;
                 }
                 if (player.status == PlayerStatus.stay) // still could win...
                 {
                     if (player.score > highScore)
                     {
                         highScore = player.score;
+                        winner = player;
                     }
                 }
                 // if busted don't bother checking!
             }
-            if (highScore > 0) // someone scored, anyway!
+            if (activePlayersNum == 1 && lastActivePlayer != null)
             {
-                // find the FIRST player in list who meets win condition
-                return players.Find(player => player.score == highScore);
+                return lastActivePlayer;
             }
-            return null; // everyone must have busted because nobody won!
+            if (winner.status == PlayerStatus.win && winner != null)
+            {
+                return winner;
+            }
+            return (highScore > 0) ? winner : null;
         }
     }
 }
