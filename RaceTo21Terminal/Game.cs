@@ -64,6 +64,7 @@ namespace RaceTo21
                 {
                     if (cardTable.OfferACard(player))
                     {
+                        Console.WriteLine();
                         Card card = deck.DealTopCard();
                         player.cards.Add(card);
                         player.score = ScoreHand(player);
@@ -189,6 +190,8 @@ namespace RaceTo21
 
         public Player DoFinalScoring()
         {
+            Console.WriteLine();
+            
             int highScore = 0;
             int activePlayersNum = 0;
             Player winner = null;
