@@ -93,7 +93,7 @@ namespace RaceTo21
         {
             for (int i = 0; i < cards.Count; i++)
             {
-                Console.Write((i + 1) + ":" + cards[i]); // a list property can look like an Array!
+                Console.Write((i + 1) + ":" + cards[i].ID); // a list property can look like an Array!
                 if (i < cards.Count -1)
                 {
                     Console.Write(" ");
