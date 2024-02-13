@@ -86,9 +86,13 @@ namespace RaceTo21
             if (player.cards.Count > 0)
             {
                 Console.Write(player.name + " has: ");
-                foreach (Card card in player.cards)
+                for (int i = 0; i < player.cards.Count; i++)
                 {
-                    Console.Write(card.name + " ");
+                    Console.Write(player.cards[i].name);
+                    if (i < player.cards.Count - 1)
+                    {
+                        Console.Write(", ");
+                    }
                 }
                 Console.Write("=" + player.score + "/21 ");
                 if (player.status != PlayerStatus.active)
