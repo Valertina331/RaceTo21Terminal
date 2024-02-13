@@ -104,7 +104,7 @@ namespace RaceTo21
             }
         }
 
-        public string DealTopCard()
+        public Card DealTopCard()
         {
             Card card = cards[cards.Count - 1];
             cards.RemoveAt(cards.Count - 1);
