@@ -19,7 +19,7 @@ namespace RaceTo21
         {
             for (int i = 0; i < players.Count; i++)
             {
-                players[i].Introduce(i+1); // List is 0-indexed but user-friendly player positions would start with 1...
+                players[i].Introduce(i + 1); // List is 0-indexed but user-friendly player positions would start with 1...
             }
         }
 
@@ -64,7 +64,7 @@ namespace RaceTo21
         {
             while (true)
             {
-                Console.Write(player.name + ", do you want a card? (Y/N)");
+                Console.Write("\n" + player.name + ", do you want a card? (Y/N)");
                 string response = Console.ReadLine();
                 if (response.ToUpper().StartsWith("Y"))
                 {
@@ -86,9 +86,9 @@ namespace RaceTo21
             if (player.cards.Count > 0)
             {
                 Console.Write(player.name + " has: ");
-                foreach (string card in player.cards)
+                foreach (Card card in player.cards)
                 {
-                    Console.Write(card + " ");
+                    Console.Write(card.name + " ");
                 }
                 Console.Write("=" + player.score + "/21 ");
                 if (player.status != PlayerStatus.active)
