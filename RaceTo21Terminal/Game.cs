@@ -74,6 +74,7 @@ namespace RaceTo21
                         else if (player.score == 21)
                         {
                             player.status = PlayerStatus.win;
+                            nextTask = Task.GameOver;
                         }
                     }
                     else
