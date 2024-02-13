@@ -112,6 +112,11 @@ namespace RaceTo21
                     nextTask = Task.PlayerTurn;
                 }
             }
+            else if (nextTask == Task.GameOver)
+            {
+                cardTable.AskPlayersIfContinue(players);
+                nextTask = Task.IntroducePlayers;
+            }
             else // we shouldn't get here...
             {
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
