@@ -237,7 +237,7 @@ namespace RaceTo21
             if (winner != null)
             {
                 winner.TotalScore += winner.score;
-                Console.WriteLine(winner.name + " wins this round with {winner.Score} points! Total score: {winner.TotalScore}");
+                Console.WriteLine(winner.name + " wins this round with " + winner.score + " points! Total score: " + winner.TotalScore);
             }
         }
     }
