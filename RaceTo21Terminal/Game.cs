@@ -37,26 +37,26 @@ namespace RaceTo21
         public void DoNextTask()
         {
             Console.WriteLine("================================"); // this line should be elsewhere right?
-            if (nextTask == "GetNumberOfPlayers")
+            if (nextTask == Task.GetNumberOfPlayers)
             {
                 numberOfPlayers = cardTable.GetNumberOfPlayers();
-                nextTask = "GetNames";
+                nextTask = Task.GetNames;
             }
-            else if (nextTask == "GetNames")
+            else if (nextTask == Task.GetNames)
             {
                 for (var count = 1; count <= numberOfPlayers; count++)
                 {
                     var name = cardTable.GetPlayerName(count);
                     AddPlayer(name); // NOTE: player list will start from 0 index even though we use 1 for our count here to make the player numbering more human-friendly
                 }
-                nextTask = "IntroducePlayers";
+                nextTask = Task.IntroducePlayers;
             }
-            else if (nextTask == "IntroducePlayers")
+            else if (nextTask == Task.IntroducePlayers)
             {
                 cardTable.ShowPlayers(players);
-                nextTask = "PlayerTurn";
+                nextTask = Task.PlayerTurn;
             }
-            else if (nextTask == "PlayerTurn")
+            else if (nextTask == Task.PlayerTurn)
             {
                 cardTable.ShowHands(players);
                 Player player = players[currentPlayer];
@@ -64,7 +64,7 @@ namespace RaceTo21
                 {
                     if (cardTable.OfferACard(player))
                     {
-                        string card = deck.DealTopCard();
+                        Card card = deck.DealTopCard();
                         player.cards.Add(card);
                         player.score = ScoreHand(player);
                         if (player.score > 21)
@@ -82,15 +82,15 @@ namespace RaceTo21
                     }
                 }
                 cardTable.ShowHand(player);
-                nextTask = "CheckForEnd";
+                nextTask = Task.CheckForEnd;
             }
-            else if (nextTask == "CheckForEnd")
+            else if (nextTask == Task.CheckForEnd)
             {
                 if (!CheckActivePlayers())
                 {
                     Player winner = DoFinalScoring();
                     cardTable.AnnounceWinner(winner);
-                    nextTask = "GameOver";
+                    nextTask = Task.GameOver;
                 }
                 else
                 {
@@ -99,13 +99,13 @@ namespace RaceTo21
                     {
                         currentPlayer = 0; // back to the first player...
                     }
-                    nextTask = "PlayerTurn";
+                    nextTask = Task.PlayerTurn;
                 }
             }
             else // we shouldn't get here...
             {
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
-                nextTask = "GameOver";
+                nextTask = Task.GameOver;
             }
         }
 
@@ -124,9 +124,9 @@ namespace RaceTo21
             }
             else
             {
-                foreach (string card in player.cards)
+                foreach (Card card in player.cards)
                 {
-                    string faceValue = card.Remove(card.Length - 1);
+                    string faceValue = card.ID.Remove(card.ID.Length - 1);
                     switch (faceValue)
                     {
                         case "K":
