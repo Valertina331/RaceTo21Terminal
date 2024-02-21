@@ -63,6 +63,6 @@ namespace RaceTo21
             		}
             		return totalValue;
         	}
-    }
+    	}
 }
 
