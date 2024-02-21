@@ -53,6 +53,7 @@ namespace RaceTo21
             }
             else if (nextTask == Task.IntroducePlayers)
             {
+                cardTable.ResetNewGame(players);
                 cardTable.ShowPlayers(players);
                 nextTask = Task.PlayerTurn;
             }
@@ -114,6 +115,8 @@ namespace RaceTo21
             }
             else if (nextTask == Task.GameOver)
             {
+                UpdateScores();
+                cardTable.ShowAllScore(players);
                 cardTable.AskPlayersIfContinue(players);
                 nextTask = Task.IntroducePlayers;
             }
@@ -237,6 +240,22 @@ namespace RaceTo21
             return (highScore > 0) ? winner : null;
         }
 
+        public void UpdateScores()
+        {
+            foreach (var player in players)
+            {
+                if (player.status == PlayerStatus.win)
+                {
+                    player.score += 1;
+                }
+                else if (player.status == PlayerStatus.bust)
+                {
+                    int excessScore = player.CardsTotalValue() - 21;
+                    player.score -= excessScore;
+                }
+            }
+        }
+        
         public void UpdateWinnerTotalScore(Player winner)
         {
             if (winner != null)
