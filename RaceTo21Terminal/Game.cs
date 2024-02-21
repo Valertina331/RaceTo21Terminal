@@ -1,4 +1,4 @@
-﻿using System;
+    ﻿using System;
 using System.Collections.Generic;
 
 namespace RaceTo21
@@ -246,12 +246,18 @@ namespace RaceTo21
             {
                 if (player.status == PlayerStatus.win)
                 {
-                    player.score += 1;
+                    player.TotalScore += 1;
+                    player.score = 1;
                 }
                 else if (player.status == PlayerStatus.bust)
                 {
                     int excessScore = player.CardsTotalValue() - 21;
-                    player.score -= excessScore;
+                    player.TotalScore -= excessScore;
+                    player.score = excessScore;
+                }
+                else
+                {
+                    player.score = 0;
                 }
             }
         }
