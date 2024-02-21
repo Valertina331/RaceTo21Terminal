@@ -246,14 +246,13 @@ namespace RaceTo21
             {
                 if (player.status == PlayerStatus.win)
                 {
-                    player.TotalScore += 1;
                     player.score = 1;
                 }
                 else if (player.status == PlayerStatus.bust)
                 {
                     int excessScore = player.CardsTotalValue() - 21;
                     player.TotalScore -= excessScore;
-                    player.score = excessScore;
+                    player.score = -excessScore;
                 }
                 else
                 {
