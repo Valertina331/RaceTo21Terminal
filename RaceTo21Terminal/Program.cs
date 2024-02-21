@@ -8,7 +8,7 @@ namespace RaceTo21
         {
             CardTable cardTable = new CardTable();
             Game game = new Game(cardTable);
-            while (game.nextTask != Task.GameOver)
+            while (game.nextTask != Task.Exit)
             {
                 game.DoNextTask();
             }
