@@ -111,7 +111,14 @@ namespace RaceTo21
             }
         }
 
-
+        public void ShowAllScore(List<Player> players)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].ShowScore();
+            }
+        }
+        
         public void AnnounceWinner(Player player)
         {
             if (player != null)
@@ -149,5 +156,13 @@ namespace RaceTo21
                  while (Console.ReadKey().Key != ConsoleKey.Enter) { }
              }
          }
+    }
+
+    public void ResetNewGame(List<Player> players)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].Reset();
+        }
     }
 }
